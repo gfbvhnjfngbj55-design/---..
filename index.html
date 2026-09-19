@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الطباعة الحرارية المخصصة | Print Pro</title>
-    <!-- استدعاء خط Cairo الاحترافي من خطوط جوجل -->
+    <title>متجر الطباعة الحرارية والمخصصات</title>
+    <!-- استدعاء خط Cairo الاحترافي -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -65,7 +65,6 @@
             margin-bottom: 25px;
             font-size: 1.5rem;
             color: #334155;
-            position: relative;
         }
 
         /* شبكة الأقسام والمنتجات */
@@ -100,13 +99,6 @@
 
         .product-card h3 {
             font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        .product-card .price {
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 0.95rem;
         }
 
         /* استمارة الطلب */
@@ -172,24 +164,6 @@
             font-weight: bold;
         }
 
-        /* المجموع الإجمالي */
-        .total-price-box {
-            background: #f1f5f9;
-            padding: 15px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 25px;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .total-price-box .amount {
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-
         /* زر الواتساب */
         .btn-whatsapp {
             width: 100%;
@@ -230,28 +204,24 @@
 
         <!-- قائمة الأقسام والمنتجات -->
         <div class="products-grid">
-            <div class="product-card active" onclick="selectProduct(this, 'تيشرت مخصص',)">
+            <div class="product-card active" onclick="selectProduct(this, 'تيشرت مخصص')">
                 <div class="icon">👕</div>
                 <h3>تيشرت (T-Shirt)</h3>
-                <div class="price">1500 دج</div>
             </div>
 
-            <div class="product-card" onclick="selectProduct(this, 'كوب حراري)">
+            <div class="product-card" onclick="selectProduct(this, 'كوب حراري')">
                 <div class="icon">☕</div>
                 <h3>كوب (Mug)</h3>
-                <div class="price">800 دج</div>
             </div>
 
-            <div class="product-card" onclick="selectProduct(this, 'حزمة ملصقات',)">
+            <div class="product-card" onclick="selectProduct(this, 'حزمة ملصقات')">
                 <div class="icon">🏷️</div>
                 <h3>ملصقات (Stickers)</h3>
-                <div class="price"></div>
             </div>
 
-            <div class="product-card" onclick="selectProduct(this, 'قبعة مطبوعة', )">
+            <div class="product-card" onclick="selectProduct(this, 'قبعة مطبوعة')">
                 <div class="icon">🧢</div>
                 <h3>قبعة (Cap)</h3>
-                <div class="price">1000 دج</div>
             </div>
         </div>
 
@@ -289,14 +259,10 @@
                     <input type="tel" id="phone" class="form-control" placeholder="06XXXXXXXX" required>
                 </div>
 
-                <!-- ملاحظات أو رابط الصورة -->
+                <!-- ملاحظات أو وصف التصميم -->
                 <div class="form-group">
                     <label>ملاحظات إضافية أو وصف التصميم:</label>
                     <textarea id="notes" class="form-control" rows="3" placeholder="اكتب التفاصيل هنا (مثال: أريد طباعة صورة شخصية مع كتابة اسم على الظهر)..."></textarea>
-                </div>
-
-                <div class="total-price-box">
-                    <span class="amount" id="totalPrice"></span>
                 </div>
 
                 <!-- زر الإرسال -->
@@ -309,21 +275,16 @@
 
     </div>
 
-    <!-- برمجة تفاعلية بسيطة -->
+    <!-- البرمجة التفاعلية -->
     <script>
-        // قيم افتراضية
         let selectedProduct = "تيشرت مخصص";
-        let unitPrice = ;
         let quantity = 1;
 
         // تغيير المنتج المحدد
-        function selectProduct(element, name, price) {
+        function selectProduct(element, name) {
             document.querySelectorAll('.product-card').forEach(card => card.classList.remove('active'));
             element.classList.add('active');
-            
             selectedProduct = name;
-            unitPrice = price;
-            updateTotal();
         }
 
         // تغيير الكمية
@@ -335,38 +296,29 @@
             if (newQty >= 1) {
                 quantity = newQty;
                 qtyInput.value = quantity;
-                updateTotal();
             }
-        }
-
-        // تحديث المجموع الكلي
-        function updateTotal() {
-            let total = unitPrice * quantity;
-            document.getElementById('totalPrice').innerText = total + "السعر حسب المقاس ";
         }
 
         // إرسال البيانات المباشر إلى WhatsApp
         function sendToWhatsApp(event) {
             event.preventDefault();
 
-            // ضع رقم صاحب الطابعة هنا بالرمز الدولي (مثال للجزائر 213):
-            let ownerPhoneNumber = "+213699748010"; 
+            // رقم صاحب المحل
+            let ownerPhoneNumber = "213699748010"; 
 
             let option = document.getElementById('productOption').value;
             let phone = document.getElementById('phone').value;
             let notes = document.getElementById('notes').value;
-            let totalPrice = unitPrice * quantity;
 
             // تجهيز نص الرسالة
             let message = `مرحباً، أرغب في تقديم طلب طباعة جديد:%0A%0A` +
                           `📦 *المنتج:* ${selectedProduct}%0A` +
                           `📏 *المقاس/النوع:* ${option}%0A` +
                           `🔢 *الكمية:* ${quantity}%0A` +
-                          `💰 *الإجمالي:* ${totalPrice} دج%0A` +
-                          `📞 *رقم الهاتف:* ${phone}%0A` +
+                          `📞 *رقم هاتف الزبون:* ${phone}%0A` +
                           `📝 *الملاحظات:* ${notes ? notes : 'لا يوجد'}`;
 
-            // فتح الواتساب فوراً
+            // فتح الواتساب
             let whatsappURL = `https://wa.me/${ownerPhoneNumber}?text=${message}`;
             window.open(whatsappURL, '_blank');
         }
