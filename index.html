@@ -230,25 +230,25 @@
 
         <!-- قائمة الأقسام والمنتجات -->
         <div class="products-grid">
-            <div class="product-card active" onclick="selectProduct(this, 'تيشرت مخصص', 1500)">
+            <div class="product-card active" onclick="selectProduct(this, 'تيشرت مخصص',)">
                 <div class="icon">👕</div>
                 <h3>تيشرت (T-Shirt)</h3>
                 <div class="price">1500 دج</div>
             </div>
 
-            <div class="product-card" onclick="selectProduct(this, 'كوب حراري', 800)">
+            <div class="product-card" onclick="selectProduct(this, 'كوب حراري)">
                 <div class="icon">☕</div>
                 <h3>كوب (Mug)</h3>
                 <div class="price">800 دج</div>
             </div>
 
-            <div class="product-card" onclick="selectProduct(this, 'حزمة ملصقات', 500)">
+            <div class="product-card" onclick="selectProduct(this, 'حزمة ملصقات',)">
                 <div class="icon">🏷️</div>
                 <h3>ملصقات (Stickers)</h3>
-                <div class="price">500 دج</div>
+                <div class="price"></div>
             </div>
 
-            <div class="product-card" onclick="selectProduct(this, 'قبعة مطبوعة', 1000)">
+            <div class="product-card" onclick="selectProduct(this, 'قبعة مطبوعة', )">
                 <div class="icon">🧢</div>
                 <h3>قبعة (Cap)</h3>
                 <div class="price">1000 دج</div>
@@ -295,10 +295,8 @@
                     <textarea id="notes" class="form-control" rows="3" placeholder="اكتب التفاصيل هنا (مثال: أريد طباعة صورة شخصية مع كتابة اسم على الظهر)..."></textarea>
                 </div>
 
-                <!-- السعر الكلي -->
                 <div class="total-price-box">
-                    <span>السعر الإجمالي التقديري:</span>
-                    <span class="amount" id="totalPrice">1500 دج</span>
+                    <span class="amount" id="totalPrice"></span>
                 </div>
 
                 <!-- زر الإرسال -->
@@ -315,7 +313,7 @@
     <script>
         // قيم افتراضية
         let selectedProduct = "تيشرت مخصص";
-        let unitPrice = 1500;
+        let unitPrice = ;
         let quantity = 1;
 
         // تغيير المنتج المحدد
@@ -344,7 +342,7 @@
         // تحديث المجموع الكلي
         function updateTotal() {
             let total = unitPrice * quantity;
-            document.getElementById('totalPrice').innerText = total + " دج";
+            document.getElementById('totalPrice').innerText = total + "السعر حسب المقاس ";
         }
 
         // إرسال البيانات المباشر إلى WhatsApp
