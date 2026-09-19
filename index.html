@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر الطباعة الحرارية المخصصة | Print Pro</title>
+    <!-- استدعاء خط Cairo الاحترافي من خطوط جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #22c55e;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-bottom: 50px;
+        }
+
+        /* هيدر الموقع */
+        header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        /* عنوان الأقسام */
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            color: #334155;
+            position: relative;
+        }
+
+        /* شبكة الأقسام والمنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover, .product-card.active {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15);
+            background: #f0fdf4;
+        }
+
+        .product-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .product-card .price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        /* استمارة الطلب */
+        .order-box {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+
+        /* التحكم في الكمية */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #cbd5e1;
+        }
+
+        .qty-input {
+            width: 70px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* المجموع الإجمالي */
+        .total-price-box {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .total-price-box .amount {
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        /* زر الواتساب */
+        .btn-whatsapp {
+            width: 100%;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #16a34a;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- هيدر الموقع -->
+    <header>
+        <h1>مركز الطباعة الحرارية والمخصصات</h1>
+        <p>اطبع تصميمك الخاص على الملابس، الأكواب، والملصقات بأعلى جودة!</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title">1. اختر نوع المنتج للطباعة</h2>
+
+        <!-- قائمة الأقسام والمنتجات -->
+        <div class="products-grid">
+            <div class="product-card active" onclick="selectProduct(this, 'تيشرت مخصص', 1500)">
+                <div class="icon">👕</div>
+                <h3>تيشرت (T-Shirt)</h3>
+                <div class="price">1500 دج</div>
+            </div>
+
+            <div class="product-card" onclick="selectProduct(this, 'كوب حراري', 800)">
+                <div class="icon">☕</div>
+                <h3>كوب (Mug)</h3>
+                <div class="price">800 دج</div>
+            </div>
+
+            <div class="product-card" onclick="selectProduct(this, 'حزمة ملصقات', 500)">
+                <div class="icon">🏷️</div>
+                <h3>ملصقات (Stickers)</h3>
+                <div class="price">500 دج</div>
+            </div>
+
+            <div class="product-card" onclick="selectProduct(this, 'قبعة مطبوعة', 1000)">
+                <div class="icon">🧢</div>
+                <h3>قبعة (Cap)</h3>
+                <div class="price">1000 دج</div>
+            </div>
+        </div>
+
+        <!-- استمارة إدخال التفاصيل -->
+        <div class="order-box">
+            <h2 class="section-title" style="margin-bottom: 15px;">2. تفاصيل الطلب</h2>
+
+            <form id="orderForm" onsubmit="sendToWhatsApp(event)">
+                
+                <!-- المقاس أو النوع -->
+                <div class="form-group">
+                    <label>المقاس / النوع المطلوب:</label>
+                    <select class="form-control" id="productOption">
+                        <option value="عادي (Standard)">قياسي / عادي</option>
+                        <option value="S">مقاس S</option>
+                        <option value="M">مقاس M</option>
+                        <option value="L">مقاس L</option>
+                        <option value="XL">مقاس XL</option>
+                    </select>
+                </div>
+
+                <!-- الكمية -->
+                <div class="form-group">
+                    <label>الكمية المطلوبة:</label>
+                    <div class="qty-control">
+                        <button type="button" class="qty-btn" onclick="changeQty(-1)">-</button>
+                        <input type="number" id="qty" class="form-control qty-input" value="1" min="1" readonly>
+                        <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+                    </div>
+                </div>
+
+                <!-- رقم الهاتف -->
+                <div class="form-group">
+                    <label>رقم هاتف الزبون (للتأكيد والاستلام):</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="06XXXXXXXX" required>
+                </div>
+
+                <!-- ملاحظات أو رابط الصورة -->
+                <div class="form-group">
+                    <label>ملاحظات إضافية أو وصف التصميم:</label>
+                    <textarea id="notes" class="form-control" rows="3" placeholder="اكتب التفاصيل هنا (مثال: أريد طباعة صورة شخصية مع كتابة اسم على الظهر)..."></textarea>
+                </div>
+
+                <!-- السعر الكلي -->
+                <div class="total-price-box">
+                    <span>السعر الإجمالي التقديري:</span>
+                    <span class="amount" id="totalPrice">1500 دج</span>
+                </div>
+
+                <!-- زر الإرسال -->
+                <button type="submit" class="btn-whatsapp">
+                    📱 إرسال الطلب عبر الواتساب
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+    <!-- برمجة تفاعلية بسيطة -->
+    <script>
+        // قيم افتراضية
+        let selectedProduct = "تيشرت مخصص";
+        let unitPrice = 1500;
+        let quantity = 1;
+
+        // تغيير المنتج المحدد
+        function selectProduct(element, name, price) {
+            document.querySelectorAll('.product-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            
+            selectedProduct = name;
+            unitPrice = price;
+            updateTotal();
+        }
+
+        // تغيير الكمية
+        function changeQty(amount) {
+            let qtyInput = document.getElementById('qty');
+            let currentQty = parseInt(qtyInput.value);
+            let newQty = currentQty + amount;
+
+            if (newQty >= 1) {
+                quantity = newQty;
+                qtyInput.value = quantity;
+                updateTotal();
+            }
+        }
+
+        // تحديث المجموع الكلي
+        function updateTotal() {
+            let total = unitPrice * quantity;
+            document.getElementById('totalPrice').innerText = total + " دج";
+        }
+
+        // إرسال البيانات المباشر إلى WhatsApp
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+
+            // ضع رقم صاحب الطابعة هنا بالرمز الدولي (مثال للجزائر 213):
+            let ownerPhoneNumber = "+213699748010"; 
+
+            let option = document.getElementById('productOption').value;
+            let phone = document.getElementById('phone').value;
+            let notes = document.getElementById('notes').value;
+            let totalPrice = unitPrice * quantity;
+
+            // تجهيز نص الرسالة
+            let message = `مرحباً، أرغب في تقديم طلب طباعة جديد:%0A%0A` +
+                          `📦 *المنتج:* ${selectedProduct}%0A` +
+                          `📏 *المقاس/النوع:* ${option}%0A` +
+                          `🔢 *الكمية:* ${quantity}%0A` +
+                          `💰 *الإجمالي:* ${totalPrice} دج%0A` +
+                          `📞 *رقم الهاتف:* ${phone}%0A` +
+                          `📝 *الملاحظات:* ${notes ? notes : 'لا يوجد'}`;
+
+            // فتح الواتساب فوراً
+            let whatsappURL = `https://wa.me/${ownerPhoneNumber}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+
+</body>
+</html>
